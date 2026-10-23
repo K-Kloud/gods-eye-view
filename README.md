@@ -138,6 +138,12 @@ npm run doctor
 npm run dev
 ```
 
+**Windows:** after installing dependencies, you can also run
+`.\Start-GodsEyeView.cmd`. It selects a supported workspace runtime when
+available, checks Node, and starts the app on localhost. See the
+[Windows setup guide](docs/WINDOWS-SETUP.md) for provider configuration and
+troubleshooting.
+
 Open **`http://localhost:4173`**. Choose **Live Contacts**, **Space Missions**,
 **Environmental**, or **Explore Manually** from the first-run panel.
 
