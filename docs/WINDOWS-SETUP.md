@@ -1,4 +1,4 @@
-# Windows setup
+# Open-i: Windows setup
 
 Use Node.js **24.x, version 24.14.0 or later, or 26.x**. Download a supported
 Windows distribution from [Node.js](https://nodejs.org/en/download). The app
