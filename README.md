@@ -59,6 +59,12 @@ Start with the included data sources, then add your own. Each layer is a separat
 
 ## 🎛️ What This Thing Does
 
+**Nigeria Cyber Defence:** the shield in the top map toolbar opens an optional
+workspace for public threat intelligence, local evidence and case timelines,
+technical indicator matching, and aggregate state-level report mapping. Existing
+features remain available. See [the Cyber Defence guide](docs/CYBER-DEFENCE.md)
+for supported sources, storage, interpretation and limits.
+
 - **🛩️ Cockpit view:** Ride inside a tracked flight — the camera holds the terrain under you all the way down.
 - **📡 Contacts:** A 250 km roster of everything near your target — step through live aircraft and drop into any cockpit.
 - **🎯 Click-to-track anything:** Camera locks on, draws a fading trail, surfaces full metadata — and a tracked fire or vessel hands you off to the nearest live camera in one click.

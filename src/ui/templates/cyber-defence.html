@@ -1,0 +1,67 @@
+<dialog id="cyber-defence" aria-labelledby="cd-title">
+  <header class="cd-header">
+    <div><small translate="no">Open-i · NIGERIA</small><h2 id="cd-title" data-i18n>Cyber Defence</h2></div>
+    <button id="cd-close" type="button" class="scene-btn" data-i18n>Close</button>
+  </header>
+  <p class="cd-scope" data-i18n>Public intelligence and local evidence. A report or indicator match does not identify an offender.</p>
+  <nav class="cd-tabs" aria-label="Cyber Defence" data-i18n-aria-label>
+    <button type="button" data-cd-tab="cases" aria-pressed="true" data-i18n>Case tracker</button>
+    <button type="button" data-cd-tab="indicators" aria-pressed="false" data-i18n>Indicator check</button>
+    <button type="button" data-cd-tab="intel" aria-pressed="false" data-i18n>Public intelligence</button>
+  </nav>
+  <p id="cd-message" class="cd-message" role="status" aria-live="polite"></p>
+  <section data-cd-page="cases">
+    <div class="cd-toolbar">
+      <button id="cd-new" type="button" class="scene-btn" data-i18n>New case</button>
+      <button id="cd-export" type="button" class="scene-btn" data-i18n>Export cases</button>
+      <button id="cd-import" type="button" class="scene-btn" data-i18n>Import cases</button>
+      <input id="cd-import-file" type="file" accept="application/json,.json" hidden aria-label="Import cases" data-i18n-aria-label />
+      <button id="cd-map" type="button" class="scene-btn" aria-pressed="false" data-i18n>Map reports</button>
+      <output id="cd-count"></output>
+    </div>
+    <p class="cd-muted" data-i18n>Evidence stays in this browser. Exports contain case data; review before sharing.</p>
+    <div class="cd-columns">
+      <aside>
+        <label for="cd-search" data-i18n>Search cases</label><input id="cd-search" class="gev-field" type="search" maxlength="180" />
+        <label for="cd-filter-state" data-i18n>State / FCT</label><select id="cd-filter-state" class="gev-field"></select>
+        <div id="cd-case-list" class="cd-case-list"></div>
+      </aside>
+      <main class="cd-workspace">
+        <form id="cd-case-form" hidden>
+          <h3 data-i18n>New case</h3>
+          <label for="cd-case-title" data-i18n>Report title</label><input id="cd-case-title" class="gev-field" maxlength="180" required />
+          <div class="cd-pair"><div><label for="cd-category" data-i18n>Report category</label><select id="cd-category" class="gev-field"></select></div>
+            <div><label for="cd-state" data-i18n>State / FCT</label><select id="cd-state" class="gev-field"></select></div></div>
+          <button type="submit" class="scene-btn" data-i18n>Save case</button>
+        </form>
+        <div id="cd-detail"></div>
+        <form id="cd-evidence-form" hidden>
+          <h3 data-i18n>Add evidence</h3>
+          <div class="cd-pair"><div><label for="cd-observed" data-i18n>Observed time (UTC)</label><input id="cd-observed" class="gev-field" type="datetime-local" required /></div>
+            <div><label for="cd-source" data-i18n>Source name</label><input id="cd-source" class="gev-field" maxlength="160" /></div></div>
+          <label for="cd-source-url" data-i18n>Public source URL (optional, HTTPS)</label><input id="cd-source-url" class="gev-field" type="url" maxlength="2000" />
+          <label for="cd-summary" data-i18n>Evidence excerpt or analyst note</label><textarea id="cd-summary" class="gev-field" rows="4" maxlength="20000" required></textarea>
+          <button type="submit" class="scene-btn" data-i18n>Add evidence</button>
+        </form>
+      </main>
+    </div>
+  </section>
+  <section data-cd-page="indicators" hidden>
+    <h3 data-i18n>Check technical indicators</h3>
+    <p class="cd-muted" data-i18n>IPv4 addresses and CVE references are matched locally against public feeds. URLs, domains and SHA-256 hashes are extracted for case correlation, without visiting them.</p>
+    <label for="cd-indicator-text" data-i18n>Paste indicators or an evidence excerpt</label>
+    <textarea id="cd-indicator-text" class="gev-field" rows="5" maxlength="20000"></textarea>
+    <button id="cd-check" type="button" class="scene-btn" data-i18n>Check intelligence</button>
+    <p class="cd-muted" data-i18n>No match does not mean safe. Technical overlap does not prove a shared operator, crime or physical location.</p>
+    <div id="cd-indicator-results" class="cd-results"></div>
+  </section>
+  <section data-cd-page="intel" hidden>
+    <div class="cd-toolbar"><h3 data-i18n>Public intelligence</h3><button id="cd-refresh" class="scene-btn" type="button" data-i18n>Refresh feeds</button></div>
+    <div id="cd-feed-state" class="cd-results"></div>
+    <p class="cd-muted" data-i18n>Global technical feeds are not Nigerian incident reports. No feed is fetched until you request it.</p>
+    <h3 data-i18n>Nigerian official sources</h3>
+    <p><a href="https://cert.gov.ng/" target="_blank" rel="noopener noreferrer" translate="no">ngCERT</a> · <a href="https://nccc.gov.ng/ngcert" target="_blank" rel="noopener noreferrer" translate="no">NCCC / ngCERT</a></p>
+    <p class="cd-muted" data-i18n>Review national advisories at the source and attach relevant public reports to a case. This app does not submit reports to authorities.</p>
+    <h3 data-i18n>Recently added exploited vulnerabilities</h3><div id="cd-advisories" class="cd-results"></div>
+  </section>
+</dialog>

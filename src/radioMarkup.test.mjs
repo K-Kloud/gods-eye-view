@@ -209,6 +209,9 @@ test('no unchanged Realtime tool definition drifts silently', () => {
   const hudLayout = unchanged.find((tool) => tool.name === 'set_hud').parameters.properties.layout;
   assert.deepEqual(hudLayout.enum, ['tactical', 'operator', 'minimal', 'cyber']);
   hudLayout.enum = hudLayout.enum.filter((layout) => layout !== 'cyber');
+  // Brand text is the only permitted difference from the pre-Open-i pin.
+  for (const tool of unchanged)
+    tool.description = tool.description.replaceAll('Open-i', "God's Eye View");
   assert.equal(unchanged.length, 14);
   const digest = createHash('sha256')
     .update(JSON.stringify(unchanged))

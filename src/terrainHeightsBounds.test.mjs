@@ -218,7 +218,13 @@ test('the route refuses a flood of requests from one client', async (t) => {
 
 test('a cross-site page cannot fill the cache or spend the visitor quota', async (t) => {
   const asked = stubTerrainUpstream(t);
-  const route = install(terrainHeightsProxy()).get('/api/terrain/heights');
+  // User/dev-server terrain must not make the two authorized lookups cache hits.
+  const dir = await mkdtemp(path.join(tmpdir(), 'gev-terrain-same-site-'));
+  assert.equal(path.dirname(dir), path.resolve(tmpdir()));
+  t.after(() => rm(dir, { recursive: true, force: true }));
+  const route = install(
+    terrainHeightsProxy({ cachePath: path.join(dir, 'cache.json') }),
+  ).get('/api/terrain/heights');
   const host = 'localhost:5173';
   const refused = [
     { host, 'sec-fetch-site': 'cross-site' }, // <img src> from any web page

@@ -1,0 +1,234 @@
+#cyber-defence {
+  width: min(1100px, calc(100vw - 24px));
+  max-width: none;
+  max-height: calc(100dvh - 28px);
+  margin: auto;
+  padding: 24px;
+  border: 1px solid #297c8d;
+  border-radius: 14px;
+  background: #09151f;
+  color: #e3edf1;
+  font: 14px/1.55 var(--font-sans, sans-serif);
+  box-shadow: 0 18px 90px #000b;
+  overflow: auto;
+  color-scheme: dark;
+}
+#cyber-defence::backdrop {
+  background: #01070dbb;
+  backdrop-filter: blur(5px);
+}
+#cyber-defence [hidden] {
+  display: none !important;
+}
+#cyber-defence h2 {
+  margin: 2px 0 0;
+  font-size: 26px;
+  letter-spacing: -0.04em;
+}
+#cyber-defence h3 {
+  margin: 18px 0 10px;
+  font-size: 16px;
+}
+#cyber-defence small,
+#cyber-defence .cd-muted {
+  color: #8da9b9;
+  font-size: 12px;
+}
+#cyber-defence label {
+  display: block;
+  margin: 12px 0 4px;
+  color: #acc3ce;
+  font-size: 12px;
+}
+#cyber-defence .gev-field {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
+  color: #eef8fc;
+  background: #102430;
+  border: 1px solid #31505d;
+  border-radius: 6px;
+}
+#cyber-defence textarea {
+  resize: vertical;
+}
+#cyber-defence button {
+  cursor: pointer;
+}
+#cyber-defence button:disabled {
+  opacity: 0.45;
+  cursor: wait;
+}
+#cyber-defence .scene-btn {
+  padding: 9px 12px;
+  margin-top: 8px;
+  color: #caf6ff;
+  border: 1px solid #376575;
+  border-radius: 6px;
+  background: #102a38;
+}
+#cyber-defence .scene-btn[aria-pressed='true'] {
+  background: #164859;
+  border-color: #40dded;
+}
+#cyber-defence a {
+  color: #68daed;
+  overflow-wrap: anywhere;
+}
+#cyber-defence :focus-visible {
+  outline: 2px solid #68efff;
+  outline-offset: 3px;
+}
+#cyber-defence .cd-header,
+#cyber-defence .cd-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#cyber-defence .cd-header small {
+  color: #63d5e8;
+  letter-spacing: 0.15em;
+}
+#cyber-defence .cd-header .scene-btn {
+  flex: 0 0 auto;
+}
+#cyber-defence .cd-toolbar .scene-btn {
+  flex: 1 1 135px;
+}
+#cyber-defence .cd-scope {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 3px solid #39d6df;
+  background: #112b36;
+  font-size: 13px;
+}
+#cyber-defence .cd-tabs {
+  display: flex;
+  gap: 6px;
+  border-bottom: 1px solid #29434d;
+  padding: 0 0 12px;
+  flex-wrap: wrap;
+}
+#cyber-defence .cd-tabs button {
+  padding: 9px 15px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #a3bac5;
+  background: transparent;
+  font: inherit;
+}
+#cyber-defence .cd-tabs button[aria-pressed='true'] {
+  background: #163544;
+  border-color: #2e6c7c;
+  color: #9bf5ff;
+}
+#cyber-defence .cd-message {
+  min-height: 22px;
+  margin: 10px 0;
+  color: #ffd38f;
+  font-size: 13px;
+}
+#cyber-defence .cd-columns {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 14px;
+}
+#cyber-defence aside {
+  border-right: 1px solid #29434d;
+  padding-right: 20px;
+}
+#cyber-defence .cd-case-list {
+  max-height: 48vh;
+  overflow-y: auto;
+  margin-top: 12px;
+}
+#cyber-defence .cd-case {
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 7px;
+  background: #102330;
+  border: 1px solid #29434d;
+  border-radius: 7px;
+  color: #e3edf1;
+}
+#cyber-defence .cd-case[aria-current='true'] {
+  border-color: #49dce9;
+  background: #153a48;
+}
+#cyber-defence .cd-case strong,
+#cyber-defence .cd-case small {
+  display: block;
+}
+#cyber-defence .cd-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+#cyber-defence .cd-card {
+  padding: 14px;
+  margin: 10px 0;
+  background: #102330;
+  border: 1px solid #29434d;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+#cyber-defence .cd-card p {
+  margin: 8px 0;
+  white-space: pre-wrap;
+}
+#cyber-defence code {
+  color: #87dae7;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+#cyber-defence .cd-badge {
+  display: inline-block;
+  margin: 5px 8px 5px 0;
+  padding: 2px 7px;
+  background: #1f3a45;
+  color: #a8e4ec;
+  border-radius: 4px;
+  font-size: 12px;
+}
+#cyber-defence .cd-alert {
+  border-left: 3px solid #e9a65a;
+}
+#cyber-defence ol {
+  padding-left: 22px;
+}
+#cyber-defence .cd-workspace {
+  min-width: 0;
+}
+#cyber-defence-open svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+@media (max-width: 650px) {
+  #cyber-defence {
+    padding: 16px;
+  }
+  #cyber-defence .cd-columns {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  #cyber-defence aside {
+    border-right: 0;
+    padding: 0;
+  }
+  #cyber-defence .cd-case-list {
+    max-height: 160px;
+  }
+  #cyber-defence .cd-pair {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

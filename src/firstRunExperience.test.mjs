@@ -988,6 +988,10 @@ test('the voice TOOL SCHEMA matches the pinned contract — the mission mapping 
   ]);
   // Cyber deliberately adds one layout; first-run missions still change no tools.
   hudLayout.enum = hudLayout.enum.filter((layout) => layout !== 'cyber');
+  // The Open-i rebrand changed description text only. Keep the original pin
+  // proving that every tool name, parameter, enum and other description is intact.
+  for (const tool of legacyTools)
+    tool.description = tool.description.replaceAll('Open-i', "God's Eye View");
   const block = JSON.stringify(legacyTools);
   // Re-derived for the voice layer manifest (generated layer enums, alias and
   // field hints), point-and-ask's pointer/referent arguments and the prompt

@@ -2,8 +2,9 @@ import { createAssetDirectorySource } from '../director/packs/source.js';
 import { createApplicationTools } from '../app/tools.js';
 import { startStandaloneChrome } from './startupChrome.js';
 import { loadToolCatalog } from './toolCatalog.js';
+import { mountCyberDefence } from '../cyberDefence/panel.js';
 export function createStandaloneTools(options) {
-  return createApplicationTools({
+  const tools = createApplicationTools({
     startChrome: startStandaloneChrome,
     sceneDataPacks: {
       sources: {
@@ -23,4 +24,10 @@ export function createStandaloneTools(options) {
       ...options?.voice,
     },
   });
+  const cyberDefence = mountCyberDefence({
+    viewer: options.scene.viewer,
+    signal: options.signal,
+  });
+  options.defer(() => cyberDefence?.destroy());
+  return { ...tools, cyberDefence };
 }

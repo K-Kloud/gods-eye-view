@@ -20,12 +20,14 @@ const stable = (value) =>
       : value;
 
 test('the complete Realtime tool payload pins the manifest-generated layer release', () => {
+  const brandedTools = structuredClone(GEV_REALTIME_TOOLS);
+  // Keep the pre-rebrand release pin; Open-i changes description wording only.
+  for (const tool of brandedTools)
+    tool.description = tool.description.replaceAll('Open-i', "God's Eye View");
   const digest = createHash('sha256')
     .update(
       JSON.stringify(
-        stable(
-          GEV_REALTIME_TOOLS.filter((tool) => tool.name !== 'set_cyber_sonar'),
-        ),
+        stable(brandedTools.filter((tool) => tool.name !== 'set_cyber_sonar')),
       ),
     )
     .digest('hex');
