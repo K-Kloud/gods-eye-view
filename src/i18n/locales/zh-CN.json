@@ -2894,5 +2894,12 @@
   "Global technical feeds are not Nigerian incident reports. No feed is fetched until you request it.": "全球技术数据源并非尼日利亚事件报告。仅在您请求后才会加载。",
   "Nigerian official sources": "尼日利亚官方来源",
   "Review national advisories at the source and attach relevant public reports to a case. This app does not submit reports to authorities.": "请在原始来源查看国家安全公告，并将相关公开报告附加到案件。本应用不会向当局提交报告。",
-  "Recently added exploited vulnerabilities": "最近新增的已遭利用漏洞"
+  "Recently added exploited vulnerabilities": "最近新增的已遭利用漏洞",
+  "OpenAI API credits are exhausted. Add credits in OpenAI API billing, then reconnect.": "OpenAI API 额度余额已用尽。请在 OpenAI API 账单页面充值，然后重新连接。",
+  "OpenAI API quota is exhausted. Review your API credits and spending limits, then reconnect.": "OpenAI API 配额已用尽。请检查 API 余额和消费限额，然后重新连接。",
+  "OpenAI is rate limiting voice connections. Wait before reconnecting and check your API rate limits.": "OpenAI 正在限制语音连接频率。请稍后重新连接，并检查 API 速率限制。",
+  "OpenAI rejected the voice connection (HTTP 429). Check API billing and rate limits, then reconnect.": "OpenAI 拒绝了语音连接（HTTP 429）。请检查 API 账单和速率限制，然后重新连接。",
+  "OpenAI refused access. Check the API key, project and voice model access.": "OpenAI 拒绝了访问。请检查 API 密钥、项目和语音模型访问权限。",
+  "The OpenAI voice service is unavailable. Try again later.": "OpenAI 语音服务不可用。请稍后重试。",
+  "Open OpenAI API billing": "打开 OpenAI API 账单页面"
 }

@@ -78,6 +78,22 @@ Keep credentials, installed runtimes, npm dependencies, caches, and generated
 builds out of commits. This repository already ignores `.env` variants,
 `node_modules`, `dist`, `.gev-cache`, and `.gev-logs`.
 
+### Voice connection HTTP 429
+
+OpenAI voice needs an API account with available credits and quota. An HTTP 429
+with `credit_balance_exhausted` means the API balance is empty: open
+[OpenAI API billing](https://platform.openai.com/settings/organization/billing),
+add credits, and reconnect voice. Creating another API key or changing microphone
+permissions does not replenish that balance.
+
+Open-i now distinguishes exhausted credits from transient rate limits and offers
+the billing link for credit/quota errors. For `rate_limit_exceeded`, follow the
+reported retry delay and review [API limits](https://platform.openai.com/settings/organization/limits).
+Unknown 429 responses remain explicitly ambiguous; see the
+[official error-code guide](https://developers.openai.com/api/docs/guides/error-codes).
+The focused offline browser check is `node scripts/qa-voice-errors.mjs`; it uses
+synthetic audio, mock responses and disposable credentials, with no live OpenAI calls.
+
 ## Verification snapshot — 23 October 2026
 
 A local Windows setup using Node 24.14.0 and the original dependency lockfile

@@ -1,3 +1,5 @@
+import { t } from '../i18n/index.js';
+
 const ERROR_LOG_LIMIT = 30;
 
 const ERROR_STORAGE_KEY = 'gev-realtime-errors';
@@ -86,6 +88,11 @@ function createErrorRecord(source, error, extra = {}) {
     sctpCauseCode: rtcError?.sctpCauseCode ?? null,
     receivedAlert: rtcError?.receivedAlert ?? null,
     sentAlert: rtcError?.sentAlert ?? null,
+    code: rtcError?.code || null,
+    httpStatus: rtcError?.httpStatus || null,
+    recovery: rtcError?.recovery || null,
+    billing: rtcError?.billing === true,
+    retryAfterSeconds: rtcError?.retryAfterSeconds ?? null,
     ...removeEmptyValues(extra),
   };
 }
@@ -95,6 +102,9 @@ function formatErrorForDisplay(record) {
   const state = [
     record.errorDetail && `detail=${record.errorDetail}`,
     record.code && `code=${record.code}`,
+    record.httpStatus && `http=${record.httpStatus}`,
+    record.retryAfterSeconds != null &&
+      `retry_after=${record.retryAfterSeconds}s`,
     record.sctpCauseCode != null && `sctp=${record.sctpCauseCode}`,
     record.connectionState && `pc=${record.connectionState}`,
     record.iceConnectionState && `ice=${record.iceConnectionState}`,
@@ -172,7 +182,10 @@ export class RealtimeDiagnostics {
     storeErrors(this.errors);
     console.error('[GEV Realtime]', record);
     this.debugLog('error', record);
-    this.setStatus('error', formatErrorForDisplay(record));
+    this.setStatus('error', formatErrorForDisplay(record), {
+      recovery: record.recovery ? t(record.recovery) : null,
+      billing: record.billing,
+    });
     return record;
   }
 

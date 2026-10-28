@@ -1,4 +1,8 @@
-import { createVoiceControl, voiceStatusLabel } from './control.js';
+import {
+  createVoiceControl,
+  voiceStatusLabel,
+  updateVoiceErrorRecovery,
+} from './control.js';
 import { createVoiceSession } from './session.js';
 import { VoiceCardControls } from './voiceCard.js';
 import { PointerReticle } from './pointerReticle.js';
@@ -114,6 +118,7 @@ export function createVoiceCommands({
           ? event.detail || t('Voice could not be started.')
           : '';
     if (event.state === 'error') ui.root.classList?.remove('error-dismissed');
+    updateVoiceErrorRecovery(ui, event);
   });
   // Captions, plan and result card nested in the control; it only reads
   // provider-neutral session events.

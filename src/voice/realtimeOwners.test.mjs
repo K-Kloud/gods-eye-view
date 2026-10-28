@@ -4,6 +4,7 @@ import { GevRealtimeController } from './realtimeController.js';
 import { RealtimeInput } from './realtimeInput.js';
 import { RealtimeViewport } from './realtimeViewport.js';
 import { resolveVoiceModel } from './voiceCost.js';
+import { realtimeHttpError } from './realtimeErrors.js';
 
 function installGlobals(t, values) {
   for (const [name, value] of Object.entries(values)) {
@@ -49,6 +50,30 @@ function browser(t) {
   });
   return { peers, streams, Peer };
 }
+
+test('a rejected SDP releases the microphone and peer and shows billing advice instead of microphone advice', async (t) => {
+  const { peers, streams } = browser(t);
+  const ui = {
+    root: { dataset: {}, classList: { remove() {} }, querySelectorAll: () => [] },
+    status: {}, detail: {}, errorDetail: {}, errorHint: {}, errorBilling: { hidden: true },
+  };
+  t.mock.method(console, 'error', () => {});
+  const controller = new GevRealtimeController({ runner: async () => ({}), debugSink: null, ui,
+    backend: {
+      requestToken: async () => ({ token: 'fixture', model: resolveVoiceModel('standard').id }),
+      negotiate: async () => { throw realtimeHttpError(new Response('', { status: 429 }), 'SDP', { error: { code: 'credit_balance_exhausted' } }); },
+    },
+  });
+  await controller.start();
+  assert.equal(controller.status, 'error');
+  assert.equal(streams[0].track.stops, 1);
+  assert.equal(peers[0].connectionState, 'closed');
+  assert.match(ui.errorHint.textContent, /credits are exhausted/);
+  assert.doesNotMatch(ui.errorHint.textContent, /microphone/);
+  assert.equal(ui.errorBilling.hidden, false);
+  controller.setStatus('idle', 'Voice off');
+  assert.equal(ui.errorBilling.hidden, true);
+});
 
 test('retained peer and channel callbacks cannot act after stop or enter a replacement session', async (t) => {
   const { peers, streams } = browser(t);

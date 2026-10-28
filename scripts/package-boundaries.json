@@ -348,6 +348,7 @@
       "server/providers/openai/instructions.js",
       "server/providers/openai/rate-limit.js",
       "server/providers/openai/realtime.js",
+      "src/voice/realtimeErrors.js",
       "server/providers/openai/tools.js",
       "src/hudSummaryResponse.js",
       "src/data/layerSnapshot.js",
@@ -1647,6 +1648,7 @@
     "modules": [
       "src/voice/realtimeController.js",
       "src/voice/realtimeBackend.js",
+      "src/voice/realtimeErrors.js",
       "src/voice/cloudVoiceAuth.js",
       "src/voice/control.js",
       "src/voice/layerSummary.js",
@@ -2305,6 +2307,7 @@
       "src/voice/layerSummary.js",
       "src/voice/cloudVoiceAuth.js",
       "src/voice/realtimeBackend.js",
+      "src/voice/realtimeErrors.js",
       "src/voice/realtimeController.js",
       "src/voice/voiceCost.js",
       "src/weatherEffectsMath.js",

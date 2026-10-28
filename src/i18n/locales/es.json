@@ -3028,5 +3028,12 @@
   "Global technical feeds are not Nigerian incident reports. No feed is fetched until you request it.": "Las fuentes técnicas globales no son informes de incidentes nigerianos. Solo se descargan cuando lo solicitas.",
   "Nigerian official sources": "Fuentes oficiales de Nigeria",
   "Review national advisories at the source and attach relevant public reports to a case. This app does not submit reports to authorities.": "Consulta los avisos nacionales en su fuente y adjunta los informes públicos pertinentes. Esta aplicación no envía informes a las autoridades.",
-  "Recently added exploited vulnerabilities": "Vulnerabilidades explotadas añadidas recientemente"
+  "Recently added exploited vulnerabilities": "Vulnerabilidades explotadas añadidas recientemente",
+  "OpenAI API credits are exhausted. Add credits in OpenAI API billing, then reconnect.": "Se han agotado los créditos de la API de OpenAI. Añade créditos en la facturación de la API de OpenAI y vuelve a conectar.",
+  "OpenAI API quota is exhausted. Review your API credits and spending limits, then reconnect.": "Se ha agotado la cuota de la API de OpenAI. Revisa los créditos y los límites de gasto de la API y vuelve a conectar.",
+  "OpenAI is rate limiting voice connections. Wait before reconnecting and check your API rate limits.": "OpenAI está limitando las conexiones de voz. Espera antes de volver a conectar y revisa los límites de solicitudes de la API.",
+  "OpenAI rejected the voice connection (HTTP 429). Check API billing and rate limits, then reconnect.": "OpenAI ha rechazado la conexión de voz (HTTP 429). Revisa la facturación y los límites de solicitudes de la API y vuelve a conectar.",
+  "OpenAI refused access. Check the API key, project and voice model access.": "OpenAI ha denegado el acceso. Revisa la clave de API, el proyecto y el acceso al modelo de voz.",
+  "The OpenAI voice service is unavailable. Try again later.": "El servicio de voz de OpenAI no está disponible. Inténtalo más tarde.",
+  "Open OpenAI API billing": "Abrir la facturación de la API de OpenAI"
 }

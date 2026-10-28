@@ -1,4 +1,6 @@
 import { DEFAULT_VOICE_TIER, resolveVoiceModel } from './voiceCost.js';
+import { readResponseJsonCapped } from '../sources/httpBody.js';
+import { realtimeHttpError } from './realtimeErrors.js';
 
 /** Realtime-compatible token and SDP requests, independent of microphone/UI ownership. */
 export function createRealtimeBackend({
@@ -39,9 +41,7 @@ export function createRealtimeBackend({
       if (!response.ok) {
         const reason =
           typeof data?.error === 'string' ? data.error : data?.error?.message;
-        throw new Error(
-          reason || `Realtime token failed: HTTP ${response.status}`,
-        );
+        throw realtimeHttpError(response, 'token', data, reason);
       }
       const token =
         data?.value || data?.client_secret?.value || data?.client_secret;
@@ -92,8 +92,14 @@ export function createRealtimeBackend({
       });
       signal.throwIfAborted();
       if (!response.ok) {
-        await response.body?.cancel?.().catch(() => {});
-        throw new Error(`Realtime SDP failed: HTTP ${response.status}`);
+        let payload = null;
+        try {
+          payload = await readResponseJsonCapped(response, 16 * 1024, signal);
+        } catch {
+          // An HTML/oversized error still carries a useful HTTP status.
+          signal.throwIfAborted();
+        }
+        throw realtimeHttpError(response, 'SDP', payload);
       }
       const answer = await response.text();
       signal.throwIfAborted();

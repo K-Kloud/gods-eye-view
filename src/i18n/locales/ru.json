@@ -3095,5 +3095,12 @@
   "Global technical feeds are not Nigerian incident reports. No feed is fetched until you request it.": "Глобальные технические источники не являются сообщениями об инцидентах в Нигерии. Загрузка выполняется только по вашему запросу.",
   "Nigerian official sources": "Официальные источники Нигерии",
   "Review national advisories at the source and attach relevant public reports to a case. This app does not submit reports to authorities.": "Изучайте национальные рекомендации в первоисточнике и добавляйте публичные сообщения в дело. Приложение не отправляет сообщения органам власти.",
-  "Recently added exploited vulnerabilities": "Недавно добавленные эксплуатируемые уязвимости"
+  "Recently added exploited vulnerabilities": "Недавно добавленные эксплуатируемые уязвимости",
+  "OpenAI API credits are exhausted. Add credits in OpenAI API billing, then reconnect.": "Кредиты API OpenAI закончились. Пополните баланс в разделе оплаты API OpenAI и подключитесь снова.",
+  "OpenAI API quota is exhausted. Review your API credits and spending limits, then reconnect.": "Квота API OpenAI исчерпана. Проверьте баланс и лимиты расходов API, затем подключитесь снова.",
+  "OpenAI is rate limiting voice connections. Wait before reconnecting and check your API rate limits.": "OpenAI ограничивает частоту голосовых подключений. Подождите перед повторным подключением и проверьте ограничения частоты запросов API.",
+  "OpenAI rejected the voice connection (HTTP 429). Check API billing and rate limits, then reconnect.": "OpenAI отклонил голосовое подключение (HTTP 429). Проверьте оплату API и ограничения частоты запросов, затем подключитесь снова.",
+  "OpenAI refused access. Check the API key, project and voice model access.": "OpenAI отказал в доступе. Проверьте API-ключ, проект и доступ к голосовой модели.",
+  "The OpenAI voice service is unavailable. Try again later.": "Голосовой сервис OpenAI недоступен. Повторите попытку позже.",
+  "Open OpenAI API billing": "Открыть раздел оплаты API OpenAI"
 }

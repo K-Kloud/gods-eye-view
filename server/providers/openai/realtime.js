@@ -14,6 +14,7 @@ import {
 } from './constants.js';
 import { realtimeInstructions } from './instructions.js';
 import { GEV_REALTIME_TOOLS } from './tools.js';
+import { realtimeFailureDetails } from '../../../src/voice/realtimeErrors.js';
 import {
   preferCodexOAuth,
   readCodexOAuthAccessToken,
@@ -338,8 +339,26 @@ function createRealtimeTokenHandler({
       }
       if (!response.ok) {
         console.warn(`[realtime-token] upstream HTTP ${response.status}`);
+        let payload = null;
+        try {
+          payload = JSON.parse(body);
+        } catch {
+          /* Keep unexpected upstream bodies private. */
+        }
+        const failure = realtimeFailureDetails(
+          response.status,
+          payload,
+          response.headers.get('Retry-After'),
+        );
+        if (failure.retryAfterSeconds != null)
+          res.setHeader('Retry-After', String(failure.retryAfterSeconds));
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
-        res.end(JSON.stringify({ error: 'Failed to create Realtime token' }));
+        res.end(
+          JSON.stringify({
+            error: 'Failed to create Realtime token',
+            ...(failure.code ? { code: failure.code } : {}),
+          }),
+        );
         return;
       }
       res.setHeader(

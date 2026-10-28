@@ -448,6 +448,12 @@
   letter-spacing: 0.035rem;
 }
 
+#command-dock .gev-voice-error-hint a {
+  color: rgba(255, 232, 235, 0.96);
+  font-size: 0.7rem;
+  text-underline-offset: 3px;
+}
+
 /* Keep the complete inline attribution row above the command dock. */
 body:not(.ui-clean-view):not(.recording-mode) #cesium-credits,
 body:not(.ui-clean-view):not(.recording-mode):has(

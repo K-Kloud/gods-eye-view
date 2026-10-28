@@ -3,6 +3,19 @@ import { t } from '../i18n/index.js';
 // The assistant's name on its card. i18n-ignore: product name
 const ASSISTANT_NAME = 'GEV';
 
+/** Keep provider recovery advice separate from transport diagnostics. */
+export function updateVoiceErrorRecovery(
+  ui,
+  { state, recovery, billing = false } = {},
+) {
+  if (ui.errorHint)
+    ui.errorHint.textContent =
+      state === 'error' && recovery
+        ? recovery
+        : t('Check microphone permission and network access, then try again.');
+  if (ui.errorBilling) ui.errorBilling.hidden = !(state === 'error' && billing);
+}
+
 /**
  * Short state label for the narrow voice heading. The `voice` context lets
  * languages use shorter words; unknown states show upper-cased.
@@ -94,6 +107,7 @@ export function createVoiceControl({ reset = false } = {}) {
         </div>
         <div id="gev-voice-error-detail"></div>
         <div class="gev-voice-error-hint">${t('Check microphone permission and network access, then try again.')}</div>
+        <div id="gev-voice-error-billing" class="gev-voice-error-hint" hidden><a href="https://platform.openai.com/settings/organization/billing" target="_blank" rel="noopener noreferrer">${t('Open OpenAI API billing')}</a></div>
       </div>
     `;
     const commandDock = document.getElementById('command-dock');
@@ -122,6 +136,8 @@ export function createVoiceControl({ reset = false } = {}) {
     detail: root.querySelector('#gev-voice-detail'),
     helpDetail: root.querySelector('.gev-voice-help-detail'),
     errorDetail: root.querySelector('#gev-voice-error-detail'),
+    errorHint: root.querySelector('.gev-voice-error-hint'),
+    errorBilling: root.querySelector('#gev-voice-error-billing'),
     tierButton: root.querySelector('#gev-voice-tier'),
     costValue: root.querySelector('#gev-voice-cost-value'),
     card: root.querySelector('#gev-voice-card'),
