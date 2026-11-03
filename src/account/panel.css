@@ -1,0 +1,391 @@
+#account-dashboard {
+  color-scheme: dark;
+  width: min(1080px, calc(100vw - 32px));
+  height: min(780px, calc(100dvh - 40px));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  margin: auto;
+  border: 1px solid #31505e;
+  border-radius: 20px;
+  background: #0c1420;
+  color: #e6eff5;
+  box-shadow: 0 24px 90px #000a;
+  font:
+    14px/1.6 Inter,
+    sans-serif;
+}
+#account-dashboard::backdrop {
+  background: #020813b8;
+  backdrop-filter: blur(8px);
+}
+#account-dashboard [hidden] {
+  display: none !important;
+}
+#account-dashboard * {
+  box-sizing: border-box;
+}
+#account-dashboard button,
+#account-dashboard input,
+#account-dashboard select,
+#account-dashboard textarea {
+  font: inherit;
+}
+#account-dashboard button {
+  cursor: pointer;
+  border: 1px solid #314453;
+  border-radius: 9px;
+  background: #172532;
+  color: #e6eff5;
+  padding: 9px 14px;
+  min-height: 40px;
+}
+#account-dashboard button:hover {
+  background: #203745;
+  border-color: #6bd7d1;
+}
+#account-dashboard :focus-visible {
+  outline: 2px solid #74e4d9;
+  outline-offset: 3px;
+}
+#account-dashboard button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+#account-dashboard .account-primary {
+  background: #8ee8d5;
+  color: #092c31;
+  border-color: #8ee8d5;
+  font-weight: 600;
+}
+.account-shell {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  height: 100%;
+}
+.account-shell > * {
+  min-width: 0;
+}
+.account-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 18px 20px;
+  background: #101e2a;
+  border-right: 1px solid #263745;
+}
+.account-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e6eff5;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+.account-brand img {
+  width: 38px;
+  height: 38px;
+}
+.account-eyebrow {
+  font:
+    10px/1.5 'JetBrains Mono',
+    monospace;
+  color: #8ba5b7;
+  letter-spacing: 0.14em;
+}
+.account-sidebar nav {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+}
+#account-dashboard .account-sidebar nav button {
+  border-color: transparent;
+  background: transparent;
+  text-align: left;
+}
+#account-dashboard .account-sidebar nav button[aria-current='page'] {
+  background: #1e3c43;
+  color: #a4f5df;
+}
+.account-identity {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 24px;
+  min-width: 0;
+}
+.account-identity > div:last-child {
+  min-width: 0;
+}
+.account-identity strong,
+.account-identity small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.account-identity small {
+  color: #91abba;
+  font-size: 11px;
+}
+#account-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #31616b;
+  color: #d1fff4;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.account-content {
+  overflow-y: auto;
+  padding: 28px 30px;
+  scrollbar-color: #395464 #0c1420;
+}
+.account-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+#account-dashboard h2 {
+  font-size: 25px;
+  font-weight: 500;
+  margin: 4px 0 0;
+}
+#account-dashboard h3 {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+#account-dashboard p {
+  color: #9fb3c2;
+  margin: 0 0 18px;
+  font-size: 13px;
+}
+#account-dashboard #account-close {
+  font-size: 24px;
+  padding: 0 12px;
+  background: transparent;
+}
+.account-welcome {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 8px 0 18px;
+}
+#account-dashboard .account-welcome h3 {
+  font-size: 26px;
+  margin: 8px 0;
+}
+.account-badge {
+  align-self: flex-start;
+  color: #9bdfca;
+  background: #193c36;
+  border: 1px solid #2e554c;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.account-card {
+  padding: 22px;
+  border: 1px solid #273b4a;
+  background: #111f2c;
+  border-radius: 13px;
+  margin-bottom: 18px;
+}
+.account-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.account-stats .account-card {
+  padding: 16px;
+}
+.account-stats span {
+  font-size: 11px;
+  color: #98aebd;
+}
+.account-stats strong {
+  display: block;
+  font-size: 30px;
+  color: #b1f1e1;
+  font-weight: 500;
+}
+.account-actions,
+.account-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+.account-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+#account-dashboard label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: #afc2d1;
+}
+#account-dashboard input,
+#account-dashboard textarea,
+#account-dashboard select {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid #385061;
+  border-radius: 8px;
+  background: #0b1723;
+  color: #e6eff5;
+  padding: 9px 11px;
+}
+#account-dashboard textarea {
+  resize: vertical;
+}
+.account-wide {
+  grid-column: 1/-1;
+}
+.account-inline {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+.account-inline label {
+  flex: 1;
+}
+.account-inline button {
+  margin-bottom: 14px;
+}
+#account-status {
+  border: 1px solid #406574;
+  border-radius: 8px;
+  padding: 12px;
+}
+#account-status[data-error='true'] {
+  color: #ffd0c8;
+  border-color: #91534d;
+}
+#account-views {
+  padding: 0;
+  list-style: none;
+}
+#account-views li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid #314453;
+  padding: 12px 0;
+}
+#account-views a {
+  color: #9eeedb;
+  overflow-wrap: anywhere;
+  flex: 1;
+}
+#account-dashboard .account-danger {
+  border-color: #754e50;
+}
+#account-dashboard .account-danger button {
+  border-color: #a66362;
+  color: #ffcdc6;
+}
+#account-mfa-secret {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  overflow-wrap: anywhere;
+  color: #b9fce9;
+  padding: 12px;
+  margin-bottom: 18px;
+}
+#account-open svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+}
+#account-open {
+  position: fixed;
+  top: 100px;
+  right: 24px;
+  z-index: 110;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #587585;
+  background: #112330e8;
+  color: #b5f2e2;
+  cursor: pointer;
+}
+#account-open:hover,
+#account-open:focus-visible {
+  border-color: #a4f5df;
+  background: #24414d;
+}
+body.ui-embed #account-open,
+body.ui-clean-view #account-open,
+body.recording-mode #account-open,
+body.cockpit-mode #account-open,
+body.scene-playback-mode #account-open {
+  display: none;
+}
+@media (max-width: 700px) {
+  #account-dashboard {
+    width: calc(100vw - 12px);
+    height: calc(100dvh - 12px);
+    border-radius: 12px;
+  }
+  .account-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  .account-sidebar {
+    padding: 12px;
+    border-right: 0;
+    border-bottom: 1px solid #263745;
+  }
+  .account-brand,
+  .account-sidebar > .account-eyebrow,
+  .account-identity {
+    display: none;
+  }
+  .account-sidebar nav {
+    display: flex;
+    overflow-x: auto;
+    margin: 0;
+    gap: 3px;
+  }
+  .account-sidebar nav button {
+    white-space: nowrap;
+  }
+  .account-content {
+    padding: 18px;
+  }
+  .account-fields {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .account-welcome {
+    display: block;
+  }
+  .account-stats {
+    gap: 8px;
+  }
+  .account-card {
+    padding: 16px;
+  }
+  .account-inline {
+    display: block;
+  }
+}

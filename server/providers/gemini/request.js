@@ -1,5 +1,6 @@
 import { readRequestBody } from '../common/request.js';
 import { admitSameSiteRequest } from '../../../src/localRequestGate.mjs';
+import { trustedRequestOrigin } from '../common/same-site.js';
 import {
   isAllowedHost,
   resolveAllowedHosts,
@@ -21,14 +22,16 @@ export function isGeminiRequestOriginAllowed(
     /[\s/?#@\\]/.test(host)
   )
     return false;
-  const protocol = req.socket?.encrypted ? 'https:' : 'http:';
+  const external = trustedRequestOrigin(req);
+  const protocol =
+    external?.protocol ?? (req.socket?.encrypted ? 'https:' : 'http:');
   if (
     !admitSameSiteRequest({
       hostHeader: host,
       protocol,
       origin,
       secFetchSite: req.headers?.['sec-fetch-site'],
-      proxyHeaders: req.headers || {},
+      proxyHeaders: external ? {} : req.headers || {},
     }).ok
   )
     return false;
@@ -37,9 +40,12 @@ export function isGeminiRequestOriginAllowed(
   const boundHost = String(configuredHost || '')
     .trim()
     .toLowerCase();
-  return isAllowedHost(host, resolveAllowedHosts(configuredAllowedHosts), [
-    boundHost,
-  ]);
+  return (
+    Boolean(external) ||
+    isAllowedHost(host, resolveAllowedHosts(configuredAllowedHosts), [
+      boundHost,
+    ])
+  );
 }
 
 /** Admit only the existing input gesture; callers cannot supply model/setup. */

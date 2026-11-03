@@ -34,7 +34,12 @@ import { cyberDefenceProxy } from './cyber-defence.js';
  * Construct the local provider plugins in their established order.
  * `realtime` configures OpenAI; `gemini` explicitly opts into Gemini Live.
  */
-function localProviderPlugins({ realtime, gemini } = {}) {
+function localProviderPlugins({
+  realtime,
+  gemini,
+  ais = true,
+  settings = true,
+} = {}) {
   return [
     openSkyProxy(),
     celestrakProxy(),
@@ -54,7 +59,7 @@ function localProviderPlugins({ realtime, gemini } = {}) {
     localReceiversProxy(),
     transitProxy(),
     adsbLolProxy(),
-    aisLiveProxy(),
+    ...(ais ? [aisLiveProxy()] : []),
     trackBackfillProxies(),
     openAiRealtimeProxy({ realtime }),
     ...(gemini ? [geminiLiveProxy({ realtime: gemini })] : []),
@@ -66,7 +71,7 @@ function localProviderPlugins({ realtime, gemini } = {}) {
     firePerimetersProxy(),
     gnssIntegrityProxy(),
     cyberDefenceProxy(),
-    keySetupEndpoint(),
+    ...(settings ? [keySetupEndpoint()] : []),
   ];
 }
 

@@ -1,0 +1,364 @@
+<dialog id="account-dashboard" aria-labelledby="account-title">
+  <div class="account-shell">
+    <aside class="account-sidebar">
+      <a class="account-brand" href="#" id="account-globe-brand"
+        ><img src="/logo.svg" alt="" /><span translate="no">Open-i</span></a
+      >
+      <span class="account-eyebrow" data-i18n>YOUR WORKSPACE</span>
+      <nav aria-label="Account navigation" data-i18n-aria-label>
+        <button
+          type="button"
+          data-account-tab="overview"
+          aria-current="page"
+          data-i18n
+        >
+          Overview
+        </button>
+        <button type="button" data-account-tab="profile" data-i18n>
+          Profile
+        </button>
+        <button type="button" data-account-tab="preferences" data-i18n>
+          Preferences
+        </button>
+        <button type="button" data-account-tab="views" data-i18n>
+          Saved views
+        </button>
+        <button type="button" data-account-tab="security" data-i18n>
+          Security
+        </button>
+        <button type="button" data-account-tab="privacy" data-i18n>
+          Privacy and data
+        </button>
+      </nav>
+      <div class="account-identity">
+        <div id="account-avatar" aria-hidden="true">OI</div>
+        <div>
+          <strong id="account-sidebar-name"></strong
+          ><small id="account-sidebar-state"></small>
+        </div>
+      </div>
+    </aside>
+    <div class="account-content">
+      <header class="account-header">
+        <div>
+          <span class="account-eyebrow" data-i18n>ACCOUNT CENTER</span>
+          <h2 id="account-title" data-i18n>Overview</h2>
+        </div>
+        <button
+          type="button"
+          id="account-close"
+          aria-label="Close dashboard"
+          data-i18n-aria-label
+        >
+          ×
+        </button>
+      </header>
+      <p id="account-status" role="status" aria-live="polite" hidden></p>
+      <div id="account-guest" class="account-card" hidden>
+        <h3 data-i18n>Your Open-i account</h3>
+        <p data-i18n>
+          Sign in to save your profile, preferences and globe views across
+          devices.
+        </p>
+        <p id="account-setup-notice" data-i18n>
+          Cloud sign-in is awaiting AWS configuration. You can continue using
+          this device's globe and local tools.
+        </p>
+        <div class="account-actions">
+          <button
+            type="button"
+            id="account-login"
+            class="account-primary"
+            data-i18n
+          >
+            Sign in</button
+          ><button type="button" id="account-signup" data-i18n>
+            Create account</button
+          ><button type="button" id="account-guest-globe" data-i18n>
+            Return to globe
+          </button>
+        </div>
+      </div>
+      <section data-account-page="overview">
+        <div class="account-welcome">
+          <div>
+            <span class="account-eyebrow" data-i18n>LIVE OPERATIONS</span>
+            <h3 id="account-greeting"></h3>
+            <p data-i18n>
+              Your globe, tools and investigations in one workspace.
+            </p>
+          </div>
+          <span class="account-badge" id="account-mode"></span>
+        </div>
+        <div class="account-stats">
+          <div class="account-card">
+            <span data-i18n>Available layers</span
+            ><strong id="account-layer-count">—</strong>
+          </div>
+          <div class="account-card">
+            <span data-i18n>Active layers</span
+            ><strong id="account-active-count">—</strong>
+          </div>
+          <div class="account-card">
+            <span data-i18n>Saved views</span
+            ><strong id="account-view-count">—</strong>
+          </div>
+        </div>
+        <div class="account-card">
+          <h3 data-i18n>Continue your work</h3>
+          <div class="account-shortcuts">
+            <button type="button" data-account-shortcut="globe" data-i18n>
+              Explore globe</button
+            ><button type="button" data-account-shortcut="cyber" data-i18n>
+              Cyber Defence</button
+            ><button
+              type="button"
+              data-account-shortcut="providers"
+              id="account-providers"
+              data-i18n
+            >
+              Provider Settings
+            </button>
+          </div>
+          <p data-i18n>
+            Investigations, evidence and provider keys remain separate from your
+            cloud profile.
+          </p>
+        </div>
+      </section>
+      <section data-account-page="profile" hidden>
+        <form id="account-profile-form" class="account-card">
+          <h3 data-i18n>Personal information</h3>
+          <div class="account-fields">
+            <label
+              ><span data-i18n>Display name</span
+              ><input name="name" maxlength="80" autocomplete="name"
+            /></label>
+            <label
+              ><span data-i18n>Organization</span
+              ><input
+                name="organization"
+                maxlength="120"
+                autocomplete="organization"
+            /></label>
+            <label
+              ><span data-i18n>Role or job title</span
+              ><input
+                name="role"
+                maxlength="80"
+                autocomplete="organization-title"
+            /></label>
+            <label
+              ><span data-i18n>Country</span
+              ><input name="country" maxlength="80" autocomplete="country-name"
+            /></label>
+            <label class="account-wide"
+              ><span data-i18n>About you</span
+              ><textarea name="bio" maxlength="500" rows="3"></textarea>
+            </label>
+          </div>
+          <button class="account-primary" type="submit" data-i18n>
+            Save profile
+          </button>
+        </form>
+      </section>
+      <section data-account-page="preferences" hidden>
+        <form id="account-preferences-form" class="account-card">
+          <h3 data-i18n>Workspace preferences</h3>
+          <p data-i18n>
+            Saving preferences does not change the current globe. Apply them
+            explicitly on each device.
+          </p>
+          <div class="account-fields">
+            <label
+              ><span data-i18n>Interface language</span
+              ><select name="language">
+                <option value="en" translate="no">English</option>
+                <option value="es" translate="no">Español</option>
+                <option value="ru" translate="no">Русский</option>
+                <option value="zh-CN" translate="no">简体中文</option>
+              </select></label
+            >
+            <label
+              ><span data-i18n>Time zone</span
+              ><input
+                name="timeZone"
+                list="account-timezones"
+                required
+                maxlength="80" /><datalist id="account-timezones">
+                <option value="Africa/Lagos"></option>
+                <option value="Europe/London"></option>
+                <option value="UTC"></option></datalist
+            ></label>
+            <label
+              ><span data-i18n>Preferred voice tier</span
+              ><select name="voiceTier">
+                <option value="standard" data-i18n>Standard</option>
+                <option value="mini" data-i18n>Mini</option>
+              </select></label
+            >
+          </div>
+          <div class="account-actions">
+            <button class="account-primary" type="submit" data-i18n>
+              Save preferences</button
+            ><button id="account-apply" type="button" data-i18n>
+              Apply saved preferences to this device
+            </button>
+          </div>
+          <p data-i18n>
+            Time zone applies to account timestamps. Globe and feed timestamps
+            keep their existing conventions. Voice changes apply to the next
+            session.
+          </p>
+        </form>
+      </section>
+      <section data-account-page="views" hidden>
+        <div class="account-card">
+          <h3 data-i18n>Your saved globe views</h3>
+          <p data-i18n>
+            Save the camera, visual style and selected layers using the existing
+            share-link format. Case evidence is excluded.
+          </p>
+          <form id="account-view-form" class="account-inline">
+            <label
+              ><span data-i18n>View name</span
+              ><input name="viewName" required maxlength="80" /></label
+            ><button type="submit" class="account-primary" data-i18n>
+              Save current view
+            </button>
+          </form>
+          <ul id="account-views"></ul>
+        </div>
+      </section>
+      <section data-account-page="security" hidden>
+        <div class="account-card">
+          <h3 data-i18n>Sign-in and security</h3>
+          <p id="account-security-summary"></p>
+          <p data-i18n>
+            Sensitive changes require a sign-in within the last ten minutes.
+          </p>
+          <div class="account-actions">
+            <button id="account-reauth" type="button" data-i18n>
+              Verify your identity</button
+            ><button id="account-logout" type="button" data-i18n>
+              Sign out</button
+            ><button id="account-logout-all" type="button" data-i18n>
+              Sign out all sessions
+            </button>
+          </div>
+        </div>
+        <form id="account-email-form" class="account-card">
+          <h3 data-i18n>Email address</h3>
+          <label
+            ><span data-i18n>New email address</span
+            ><input
+              type="email"
+              name="email"
+              required
+              maxlength="254"
+              autocomplete="email" /></label
+          ><button type="submit" data-i18n>Send verification code</button>
+        </form>
+        <form id="account-email-code-form" class="account-card">
+          <label
+            ><span data-i18n>Email verification code</span
+            ><input
+              name="code"
+              inputmode="numeric"
+              pattern="[0-9]{6}"
+              maxlength="6"
+              required
+              autocomplete="one-time-code"
+          /></label>
+          <div class="account-actions">
+            <button type="submit" data-i18n>Verify email</button
+            ><button type="button" id="account-email-resend" data-i18n>
+              Resend code
+            </button>
+          </div>
+        </form>
+        <form id="account-password-form" class="account-card">
+          <h3 data-i18n>Change password</h3>
+          <div class="account-fields">
+            <label
+              ><span data-i18n>Current password</span
+              ><input
+                type="password"
+                name="currentPassword"
+                required
+                autocomplete="current-password"
+                maxlength="256" /></label
+            ><label
+              ><span data-i18n>New password</span
+              ><input
+                type="password"
+                name="newPassword"
+                required
+                minlength="12"
+                maxlength="256"
+                autocomplete="new-password"
+            /></label>
+          </div>
+          <button type="submit" data-i18n>Update password</button>
+        </form>
+        <div class="account-card">
+          <h3 data-i18n>Authenticator app</h3>
+          <p id="account-mfa-state"></p>
+          <div class="account-actions">
+            <button id="account-mfa-start" type="button" data-i18n>
+              Set up authenticator</button
+            ><button id="account-mfa-disable" type="button" data-i18n>
+              Disable authenticator
+            </button>
+          </div>
+          <form id="account-mfa-form" hidden>
+            <p data-i18n>
+              Add this setup key to your authenticator app, then enter its
+              six-digit code. Keep the key private.
+            </p>
+            <output id="account-mfa-secret"></output
+            ><label
+              ><span data-i18n>Authenticator code</span
+              ><input
+                name="code"
+                inputmode="numeric"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                autocomplete="one-time-code"
+                required /></label
+            ><button type="submit" data-i18n>Enable authenticator</button>
+          </form>
+        </div>
+      </section>
+      <section data-account-page="privacy" hidden>
+        <div class="account-card">
+          <h3 data-i18n>Your data, your control</h3>
+          <p data-i18n>
+            Your cloud account stores your profile, preferences and saved views.
+            Manual evidence, local investigations and provider credentials are
+            not uploaded to it.
+          </p>
+          <button id="account-export" type="button" data-i18n>
+            Export account data
+          </button>
+        </div>
+        <form id="account-delete-form" class="account-card account-danger">
+          <h3 data-i18n>Delete account</h3>
+          <p data-i18n>
+            This permanently deletes your sign-in account and cloud profile.
+            Browser evidence remains on this device and must be managed in Cyber
+            Defence.
+          </p>
+          <label
+            ><span data-i18n>Type DELETE to confirm</span
+            ><input
+              name="confirm"
+              required
+              pattern="DELETE"
+              autocomplete="off" /></label
+          ><button type="submit" data-i18n>Delete account permanently</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</dialog>

@@ -3,6 +3,7 @@ import { createApplicationTools } from '../app/tools.js';
 import { startStandaloneChrome } from './startupChrome.js';
 import { loadToolCatalog } from './toolCatalog.js';
 import { mountCyberDefence } from '../cyberDefence/panel.js';
+import { mountAccountDashboard } from '../account/panel.js';
 export function createStandaloneTools(options) {
   const tools = createApplicationTools({
     startChrome: startStandaloneChrome,
@@ -29,5 +30,11 @@ export function createStandaloneTools(options) {
     signal: options.signal,
   });
   options.defer(() => cyberDefence?.destroy());
-  return { ...tools, cyberDefence };
+  const accountDashboard = mountAccountDashboard({
+    signal: options.signal,
+    dataManager: options.data.dataManager,
+    styleManager: options.controls.styleManager,
+  });
+  options.defer(() => accountDashboard?.destroy());
+  return { ...tools, cyberDefence, accountDashboard };
 }

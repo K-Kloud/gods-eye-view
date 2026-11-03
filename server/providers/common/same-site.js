@@ -1,5 +1,15 @@
 import { admitSameSiteRequest } from '../../../src/localRequestGate.mjs';
 
+// A server composition can explicitly establish its external origin after
+// validating Host at a trusted load balancer boundary. Headers cannot set this.
+const externalOrigins = new WeakMap();
+export function setTrustedRequestOrigin(req, origin) {
+  externalOrigins.set(req, new URL(origin));
+}
+export function trustedRequestOrigin(req) {
+  return externalOrigins.get(req);
+}
+
 /**
  * Cross-site request gate for cost-bearing and log endpoints. Feeds the
  * request to the pure, unit-tested `admitSameSiteRequest` and answers 403
@@ -13,12 +23,14 @@ import { admitSameSiteRequest } from '../../../src/localRequestGate.mjs';
  * @returns {boolean} True when a 403 was sent.
  */
 export function admitSameSite(req, res) {
+  const external = externalOrigins.get(req);
   const verdict = admitSameSiteRequest({
-    hostHeader: req.headers?.host,
-    protocol: req.socket?.encrypted ? 'https:' : 'http:',
+    hostHeader: external?.host ?? req.headers?.host,
+    protocol:
+      external?.protocol ?? (req.socket?.encrypted ? 'https:' : 'http:'),
     origin: req.headers?.origin,
     secFetchSite: req.headers?.['sec-fetch-site'],
-    proxyHeaders: req.headers || {},
+    proxyHeaders: external ? {} : req.headers || {},
   });
   if (verdict.ok) return false;
   res.statusCode = verdict.status;

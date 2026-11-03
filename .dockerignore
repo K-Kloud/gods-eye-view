@@ -1,6 +1,14 @@
 # Keep keys and local state out of the build context: compose bind-mounts the
 # checkout at run time, so the image never needs them.
 .git
+.terraform
+**/.terraform
+*.tfstate*
+**/*.tfstate*
+*.tfplan
+**/*.tfplan
+terraform.tfvars
+**/terraform.tfvars
 node_modules
 dist
 .env

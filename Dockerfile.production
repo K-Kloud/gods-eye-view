@@ -1,0 +1,22 @@
+# syntax=docker/dockerfile:1
+FROM node:24.14.0-slim@sha256:d8e448a56fc63242f70026718378bd4b00f8c82e78d20eefb199224a4d8e33d8 AS build
+WORKDIR /app
+ENV PUPPETEER_SKIP_DOWNLOAD=1
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+# Browser-visible tokens must use browser-restricted keys. Server secrets are supplied at runtime.
+ARG GOOGLE_MAPS_API_KEY
+ARG CESIUM_ION_TOKEN
+ARG MAPILLARY_CLIENT_TOKEN
+RUN npm run build && npm prune --omit=dev
+
+FROM node:24.14.0-slim@sha256:d8e448a56fc63242f70026718378bd4b00f8c82e78d20eefb199224a4d8e33d8
+ENV NODE_ENV=production HOST=0.0.0.0 PORT=4173
+WORKDIR /app
+COPY --from=build --chown=node:node /app /app
+# Existing provider disk caches are disposable and owned by the unprivileged runtime.
+RUN mkdir -p /app/.gev-cache /app/.gev-logs && chown -R node:node /app/.gev-cache /app/.gev-logs
+USER node
+EXPOSE 4173
+CMD ["node", "server/standalone/production.js"]

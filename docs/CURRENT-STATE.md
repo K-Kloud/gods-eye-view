@@ -1,5 +1,16 @@
 # God's Eye View Current State
 
+Open-i's standalone account center adds an overview, profile, preferences, saved
+views, Cognito self-service security and account data controls alongside the
+existing globe. No account configuration preserves local guest operation.
+Sign-in does not automatically apply preferences or upload browser investigations,
+evidence or provider credentials. Cloud sessions use opaque HttpOnly cookies and
+encrypted DynamoDB records with expiry, CSRF checks and shared revocation. The
+production server protects provider APIs and separates one private AIS collector
+from scalable web tasks. Terraform/container configuration is supplied; AWS
+provisioning and live Cognito verification are separate deployment steps. See
+[account setup](ACCOUNTS-AWS.md).
+
 Analyst region queries resolve unique Natural Earth names offline without
 geocoding, so Gold Coast and Ivory Coast name the West African natural regions.
 Duplicate names require a geocoded containment anchor; when several entries for

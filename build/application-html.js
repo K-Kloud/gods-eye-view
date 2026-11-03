@@ -10,6 +10,7 @@ export const APPLICATION_TEMPLATES = Object.freeze([
   'welcome',
   'provider-settings',
   'cyber-defence',
+  'account',
   'hud-loading',
 ]);
 const allowed = new Set(APPLICATION_TEMPLATES);

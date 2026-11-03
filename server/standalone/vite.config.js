@@ -7,6 +7,7 @@ import { localMcpPlugin } from '../mcp/plugin.js';
 import { apiNotFoundPlugin } from './api-not-found.js';
 import { standaloneVoiceTools } from './voiceTools.js';
 import { unwatchedRuntimeDirsPlugin } from './unwatched-cache.js';
+import { accountPlugin } from './account/index.js';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 
@@ -19,6 +20,7 @@ export default defineConfig(({ command, mode }) => {
   const tools = standaloneVoiceTools();
   return createBrowserViteConfig({
     plugins: [
+      accountPlugin(),
       ...localProviderPlugins({ realtime: { tools }, gemini: { tools } }),
       localMcpPlugin(),
       apiNotFoundPlugin(),

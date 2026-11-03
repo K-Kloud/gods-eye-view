@@ -1,0 +1,11 @@
+region          = "eu-west-1"
+environment     = "production"
+domain_name     = "openi.example.com"
+route53_zone_id = "Z_REPLACE_ME"
+certificate_arn = "arn:aws:acm:eu-west-1:123456789012:certificate/REPLACE_ME"
+container_image = "123456789012.dkr.ecr.eu-west-1.amazonaws.com/open-i@sha256:REPLACE_ME"
+allow_signup    = false
+min_web_tasks   = 2
+max_web_tasks   = 6
+# References only. Keep real provider values in Secrets Manager, outside Terraform state.
+provider_secret_arns = {}

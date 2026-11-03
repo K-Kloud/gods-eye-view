@@ -203,3 +203,9 @@ shared chrome owns the welcome/loading transition; standalone composition adds
 Provider Settings. `build/html` expands an allowlist of component markers from
 `src/ui/templates`; unknown names cannot read arbitrary filesystem paths. The
 standalone document expands to the same markup as before this extraction.
+
+The standalone tools phase also owns the optional account dashboard and its
+request/listener cleanup. Its allowlisted template adds a native dialog alongside
+the globe. Cognito routes and DynamoDB sessions are composed by the standalone
+server, outside the portable application/tool packages. See [accounts and AWS
+deployment](ACCOUNTS-AWS.md) for configuration and the production boundary.

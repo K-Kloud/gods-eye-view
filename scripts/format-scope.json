@@ -1,6 +1,12 @@
 [
   ".prettierrc.json",
   "package.json",
+  "build/security-headers.js",
+  "src/account/panel.css",
+  "src/ui/templates/account.html",
+  "server/standalone/account/account.test.mjs",
+  "scripts/qa-accounts.mjs",
+  "scripts/qa-production.mjs",
   "scripts/format-scope.json",
   "src/ui/styles/form-field.css",
   "scripts/qa-form-fields.mjs",

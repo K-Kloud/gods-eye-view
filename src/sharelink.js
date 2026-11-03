@@ -507,6 +507,12 @@ export class ShareLinkManager {
     this._scheduleUpdate();
   }
 
+  /** Capture the current view without changing history or the clipboard. */
+  captureHash() {
+    const params = this._buildHashParams();
+    return params ? `#${params.toString()}` : null;
+  }
+
   /** Copy a current-state snapshot with a copy-time timestamp. Returns true on success. */
   async copyLink({ nowMs = Date.now() } = {}) {
     const params = this._buildHashParams();
