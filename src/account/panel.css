@@ -141,6 +141,7 @@
   flex-shrink: 0;
 }
 .account-content {
+  overflow-wrap: anywhere;
   overflow-y: auto;
   padding: 28px 30px;
   scrollbar-color: #395464 #0c1420;

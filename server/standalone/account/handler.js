@@ -99,10 +99,18 @@ export function createAccountHandler({
     const security = await store.get(`SECURITY#${record.sub}`);
     if (security?.deleted || (security?.epoch ?? 0) !== record.epoch)
       return null;
+    let accessToken;
+    try {
+      accessToken = vault.open(record.credentials).accessToken;
+    } catch {
+      // A retired key or damaged session must allow a fresh sign-in.
+      return null;
+    }
+    if (typeof accessToken !== 'string' || !accessToken) return null;
     return {
       ...record,
       pk,
-      accessToken: vault.open(record.credentials).accessToken,
+      accessToken,
     };
   }
 

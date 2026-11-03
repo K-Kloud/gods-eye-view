@@ -247,6 +247,21 @@ test('login, profile writes and sensitive actions reject CSRF, foreign origins a
   assert.equal((await h.request('export', auth)).status, 401);
 });
 
+test('credentials encrypted with a retired session key require a new sign-in', async (t) => {
+  const h = await harness(t);
+  const auth = await h.login();
+  const key = `SESSION#${digest(auth.cookie.split('=')[1])}`;
+  h.rows.get(key).credentials = createTokenVault(
+    randomBytes(32).toString('base64'),
+  ).seal({ accessToken: 'retired-key-fixture' });
+  const response = await h.request('session', auth);
+  assert.equal(response.status, 200);
+  assert.equal((await response.json()).user, null);
+  assert.equal((await h.request('export', auth)).status, 401);
+  const renewed = await h.login();
+  assert.equal((await h.request('export', renewed)).status, 200);
+});
+
 test('OIDC callback requires a browser-bound one-use transaction and rejects replay', async (t) => {
   const h = await harness(t);
   const auth = await h.login();
