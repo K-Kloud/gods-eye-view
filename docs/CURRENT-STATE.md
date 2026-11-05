@@ -1,5 +1,11 @@
 # God's Eye View Current State
 
+Cyber Defence includes public channel correlation across sourced kidnapping and
+terrorism cases, local time-ordered tracing of supplied transfers, and guided
+response for oil-sector cyber incidents, fraud, data exposure and compromised
+bank accounts. Channel observations and completed response steps can be drafted
+into the existing evidence journal. See [Cyber Defence](CYBER-DEFENCE.md).
+
 Open-i's standalone account center adds an overview, profile, preferences, saved
 views, Cognito self-service security and account data controls alongside the
 existing globe. No account configuration preserves local guest operation.

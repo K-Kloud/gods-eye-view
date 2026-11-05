@@ -205,6 +205,41 @@
 #cyber-defence .cd-workspace {
   min-width: 0;
 }
+#cyber-defence .cd-table-scroll {
+  max-height: 55vh;
+  overflow: auto;
+  border: 1px solid #29434d;
+  border-radius: 6px;
+}
+#cd-transfer-results {
+  overflow-wrap: anywhere;
+}
+#cyber-defence .cd-table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#cyber-defence .cd-table-scroll :is(th, td) {
+  padding: 8px 10px;
+  text-align: start;
+  vertical-align: top;
+  border-bottom: 1px solid #29434d;
+  overflow-wrap: anywhere;
+  min-width: 100px;
+}
+#cyber-defence .cd-table-scroll th {
+  background: #163544;
+}
+#cyber-defence .cd-response-steps {
+  margin: 14px 0;
+  border: 1px solid #29434d;
+  border-radius: 6px;
+}
+#cyber-defence .cd-response-step {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 8px 0;
+}
 #cyber-defence-open svg {
   width: 21px;
   height: 21px;

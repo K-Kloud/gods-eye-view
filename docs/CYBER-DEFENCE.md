@@ -30,6 +30,30 @@ share-link identifiers retain their original interfaces.
 
 ## Sources and interpretation
 
+The Cyber Defence menu includes three analyst workflows.
+
+- **Digital Intelligence and Surveillance** groups exact public channel addresses
+  cited in local kidnapping or terrorism reports. Prepare a channel observation,
+  supply the public report's source name and HTTPS link in the evidence form, and
+  save it. The results link to the original cases and show each source and
+  observation time. Retracted cases are excluded.
+- **Disruption of Terrorist Financing** traces incoming or outgoing transfers
+  in supplied records from one ledger and asset at a time. Paste six
+  tab-separated fields per row in the order reference, UTC timestamp, sender,
+  recipient, amount and source. A timestamp can be written as
+  `2026-01-01T12:00:00Z`. Use a unique transfer reference and aliases for
+  private accounts. The browser shows up to four time-ordered hops and keeps
+  the input in page memory. A reachable transfer is a lead for review.
+  [NFIU reporting guidance](https://www.nfiu.gov.ng/AdvisoryAndGuidance)
+- **Cyber Defence and Fraud Prevention** has response checklists for oil-sector
+  operational technology, fraud, personal-data exposure and bank-account
+  compromise. Completed steps can be drafted into an existing cyber case.
+  The panel links to the current indicator checker and official reporting or
+  advisory pages. [ngCERT](https://nccc.gov.ng/ngcert),
+  [CISA industrial control resources](https://www.cisa.gov/topics/industrial-control-systems),
+  [CBN complaints](https://www.cbn.gov.ng/FinInc/FinLit/LodgeComplaint.html),
+  [NDPC breach reporting](https://services.ndpc.gov.ng/breach/)
+
 - [CISA KEV, official CISA mirror](https://github.com/cisagov/kev-data): known
   exploited vulnerability references and remediation text. This is global data,
   not a record of attacks in Nigeria or proof that a particular asset was compromised.

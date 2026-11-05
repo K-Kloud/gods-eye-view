@@ -8,6 +8,9 @@
     <button type="button" data-cd-tab="cases" aria-pressed="true" data-i18n>Case tracker</button>
     <button type="button" data-cd-tab="indicators" aria-pressed="false" data-i18n>Indicator check</button>
     <button type="button" data-cd-tab="intel" aria-pressed="false" data-i18n>Public intelligence</button>
+    <button type="button" data-cd-tab="networks" aria-pressed="false" data-i18n>Digital Intelligence and Surveillance</button>
+    <button type="button" data-cd-tab="financing" aria-pressed="false" data-i18n>Disruption of Terrorist Financing</button>
+    <button type="button" data-cd-tab="prevention" aria-pressed="false" data-i18n>Cyber Defence and Fraud Prevention</button>
   </nav>
   <p id="cd-message" class="cd-message" role="status" aria-live="polite"></p>
   <section data-cd-page="cases">
@@ -63,5 +66,86 @@
     <p><a href="https://cert.gov.ng/" target="_blank" rel="noopener noreferrer" translate="no">ngCERT</a> · <a href="https://nccc.gov.ng/ngcert" target="_blank" rel="noopener noreferrer" translate="no">NCCC / ngCERT</a></p>
     <p class="cd-muted" data-i18n>Review national advisories at the source and attach relevant public reports to a case. This app does not submit reports to authorities.</p>
     <h3 data-i18n>Recently added exploited vulnerabilities</h3><div id="cd-advisories" class="cd-results"></div>
+  </section>
+  <section data-cd-page="networks" hidden>
+    <h3 data-i18n>Public channel leads</h3>
+    <p class="cd-muted" data-i18n>Compare public channel and recruitment references in sourced kidnapping and terrorism reports. Verify exact matches independently before drawing conclusions about ownership or links between cases.</p>
+    <form id="cd-channel-form" class="cd-card">
+      <label for="cd-channel-case" data-i18n>Case for this observation</label>
+      <select id="cd-channel-case" class="gev-field" required></select>
+      <label for="cd-channel-url" data-i18n>Public HTTPS channel address</label>
+      <input id="cd-channel-url" class="gev-field" type="url" maxlength="2000" required autocomplete="off" />
+      <p class="cd-muted" data-i18n>Use the direct channel path without a query or fragment. Add the public report’s source name and HTTPS link before saving the evidence draft.</p>
+      <button id="cd-channel-prepare" type="submit" class="scene-btn" data-i18n>Prepare channel evidence</button>
+      <button type="button" class="scene-btn" data-cd-start="kidnapping" data-i18n>New kidnapping report</button>
+      <button type="button" class="scene-btn" data-cd-start="terrorism" data-i18n>New terrorism report</button>
+    </form>
+    <label for="cd-channel-search" data-i18n>Filter channel addresses</label>
+    <input id="cd-channel-search" class="gev-field" type="search" maxlength="180" />
+    <p class="cd-muted" data-i18n>Showing up to 30 channels and six recent observations per channel. Channel addresses are displayed as text.</p>
+    <div id="cd-channel-results"></div>
+  </section>
+  <section data-cd-page="financing" hidden>
+    <h3 data-i18n>Trace observed transfers</h3>
+    <p class="cd-muted" data-i18n>Trace time-ordered connections in supplied public blockchain records or authorised ledger extracts. Verify ownership, the source of funds and any suspected illicit activity independently.</p>
+    <form id="cd-transfer-form" class="cd-card" autocomplete="off">
+      <div class="cd-pair">
+        <div>
+          <label for="cd-transfer-ledger" data-i18n>Ledger or chain and asset</label>
+          <input id="cd-transfer-ledger" class="gev-field" maxlength="100" required autocomplete="off" />
+        </div>
+        <div>
+          <label for="cd-transfer-seed" data-i18n>Starting address or alias</label>
+          <input id="cd-transfer-seed" class="gev-field" maxlength="160" pattern="[a-zA-Z0-9:_\-]+" required autocomplete="off" />
+        </div>
+        <div>
+          <label for="cd-transfer-direction" data-i18n>Direction</label>
+          <select id="cd-transfer-direction" class="gev-field">
+            <option value="outgoing" data-i18n>Outgoing transfers</option>
+            <option value="incoming" data-i18n>Incoming transfers</option>
+          </select>
+        </div>
+        <div>
+          <label for="cd-transfer-hops" data-i18n>Maximum hops</label>
+          <input id="cd-transfer-hops" class="gev-field" type="number" min="1" max="4" step="1" value="2" required />
+        </div>
+      </div>
+      <label for="cd-transfer-rows" data-i18n>Transfer rows (tab-separated)</label>
+      <p id="cd-transfer-help" class="cd-muted" data-i18n>Use one ledger and asset per run. Paste up to 300 rows without a header. Each row has a unique reference, ISO UTC time, sender, recipient, amount and source, separated by tabs. Use aliases for private accounts.</p>
+      <p class="cd-muted" data-i18n>Use a transaction hash plus a transfer index when one transaction contains several transfers. Identifiers are case-sensitive. Input is processed in this page and cleared on reload.</p>
+      <textarea id="cd-transfer-rows" class="gev-field" rows="5" maxlength="100000" required spellcheck="false" aria-describedby="cd-transfer-help"></textarea>
+      <button type="submit" class="scene-btn" data-i18n>Trace transfers</button>
+    </form>
+    <div id="cd-transfer-results" aria-live="polite"></div>
+    <p><a href="https://www.nfiu.gov.ng/AdvisoryAndGuidance" target="_blank" rel="noopener noreferrer" data-i18n>NFIU reporting guidance</a></p>
+  </section>
+  <section data-cd-page="prevention" hidden>
+    <h3 data-i18n>Incident triage and prevention</h3>
+    <p class="cd-muted" data-i18n>Choose a scenario and record completed response steps. Use a redacted case reference and leave passwords, one-time codes and full account numbers out of evidence.</p>
+    <form id="cd-response-form" class="cd-card">
+      <label for="cd-response-kind" data-i18n>Response scenario</label>
+      <select id="cd-response-kind" class="gev-field">
+        <option value="oil" data-i18n>Oil-sector and industrial systems</option>
+        <option value="fraud" data-i18n>Fraud and payment scams</option>
+        <option value="privacy" data-i18n>Personal-data theft or exposure</option>
+        <option value="bank" data-i18n>Bank-account compromise</option>
+      </select>
+      <fieldset id="cd-response-steps" class="cd-response-steps">
+        <legend data-i18n>Completed steps</legend>
+        <div id="cd-response-checklist"></div>
+      </fieldset>
+      <label for="cd-response-case" data-i18n>Case for response notes</label>
+      <select id="cd-response-case" class="gev-field" required></select>
+      <button id="cd-response-prepare" type="submit" class="scene-btn" data-i18n>Prepare response evidence</button>
+      <button type="button" class="scene-btn" data-cd-start="cyber" data-i18n>New cyber incident case</button>
+      <button id="cd-response-indicators" type="button" class="scene-btn" data-i18n>Check technical indicators</button>
+    </form>
+    <h3 data-i18n>Advisories and reporting routes</h3>
+    <ul>
+      <li><a href="https://nccc.gov.ng/ngcert" target="_blank" rel="noopener noreferrer" data-i18n>ngCERT incident reporting</a></li>
+      <li><a href="https://www.cisa.gov/topics/industrial-control-systems" target="_blank" rel="noopener noreferrer" data-i18n>CISA industrial control resources</a></li>
+      <li><a href="https://www.cbn.gov.ng/FinInc/FinLit/LodgeComplaint.html" target="_blank" rel="noopener noreferrer" data-i18n>Central Bank of Nigeria complaint guidance</a></li>
+      <li><a href="https://services.ndpc.gov.ng/breach/" target="_blank" rel="noopener noreferrer" data-i18n>NDPC data breach reporting</a></li>
+    </ul>
   </section>
 </dialog>

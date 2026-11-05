@@ -17,6 +17,7 @@ import {
 } from './model.js';
 import { createCaseStore, STORAGE_KEY } from './store.js';
 import { createCaseMap } from './map.js';
+import { mountCapabilities } from './capabilities.js';
 
 const CATEGORY_LABELS = {
   cyber: msg('Cyber incident'),
@@ -113,8 +114,9 @@ export function mountCyberDefence({ viewer, signal }) {
     root.querySelectorAll('[data-cd-page]').forEach((p) => {
       p.hidden = p.dataset.cdPage !== page;
     });
+    capabilities.show(page);
   }
-  function newCase() {
+  function newCase(category) {
     if (locked || !discardDraft()) return;
     el('evidence-form').reset();
     selected = null;
@@ -122,6 +124,10 @@ export function mountCyberDefence({ viewer, signal }) {
     el('evidence-form').hidden = true;
     el('case-form').hidden = false;
     el('case-form').reset();
+    if (category) {
+      el('category').value = category;
+      switchPage('cases');
+    }
     el('case-title').focus();
     renderList();
   }
@@ -163,15 +169,18 @@ export function mountCyberDefence({ viewer, signal }) {
       );
     map.sync(cases);
   }
-  function selectCase(id) {
-    if (id !== selected && !discardDraft()) return;
-    if (id !== selected) el('evidence-form').reset();
+  function selectCase(id, summary) {
+    const replacesDraft = id !== selected || summary !== undefined;
+    if (replacesDraft && !discardDraft()) return false;
+    if (replacesDraft) el('evidence-form').reset();
     selected = id;
     el('case-form').hidden = true;
     el('evidence-form').hidden = locked;
     el('observed').value = new Date().toISOString().slice(0, 16);
+    if (summary !== undefined) el('summary').value = summary;
     renderList();
     renderDetail();
+    return true;
   }
   function renderDetail() {
     const cases = store?.list() || [],
@@ -442,6 +451,33 @@ export function mountCyberDefence({ viewer, signal }) {
       host.append(card);
     }
   }
+  const capabilities = mountCapabilities({
+    root,
+    signal: lifetime.signal,
+    readCases: () => store?.list() || [],
+    openCase(id, summary) {
+      const row = store?.list().find((item) => item.id === id);
+      if (
+        !row ||
+        (summary !== undefined &&
+          (el('new').disabled || !['open', 'review'].includes(row.status)))
+      )
+        return false;
+      if (
+        (id !== selected || summary !== undefined) &&
+        !selectCase(id, summary)
+      )
+        return false;
+      switchPage('cases');
+      if (summary !== undefined) el('summary').focus();
+      return true;
+    },
+    startCase(category) {
+      if (!el('new').disabled) newCase(category);
+    },
+    showIndicators: () => switchPage('indicators'),
+    say,
+  });
   listen(opener, 'click', () => {
     if (!root.open) root.showModal();
   });
@@ -451,7 +487,7 @@ export function mountCyberDefence({ viewer, signal }) {
   root
     .querySelectorAll('[data-cd-tab]')
     .forEach((b) => listen(b, 'click', () => switchPage(b.dataset.cdTab)));
-  listen(el('new'), 'click', newCase);
+  listen(el('new'), 'click', () => newCase());
   listen(el('search'), 'input', renderList);
   listen(el('filter-state'), 'change', renderList);
   listen(el('case-form'), 'submit', (e) => {
@@ -554,6 +590,9 @@ export function mountCyberDefence({ viewer, signal }) {
       });
       el('import').disabled = false;
       renderList();
+      capabilities.show(
+        root.querySelector('[data-cd-tab][aria-pressed="true"]')?.dataset.cdTab,
+      );
     } catch {
       if (!lifetime.signal.aborted)
         say(
